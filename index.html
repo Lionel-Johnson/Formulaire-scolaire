@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>SCHOOL FORMULAR</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <form id="regForm" action="" method="post" autocomplete = "off">
+      <h1 align = center>INSCRIPTION AU LYCEE</h1>
+      <div style="text-align:center;">
+        <span class="step" id="step-1">1</span>
+        <span class="step" id="step-2">2</span>
+      </div>
+
+      <div class="tab" id = "tab-1">
+        <h3>Formulaire de l'élève</h3>
+        <p><input placeholder="Entrez un nom..." oninput="this.className = ''" name="" id="Enom" ></p>
+    <p><input placeholder="Entrez un prénom..." oninput="this.className = ''" name="" id="Eprenom" ></p>
+    <p>
+      <select name="classe" id="sexe">
+        <option value="">Genre de l'élève</option>
+        <option value="Masculin">Masculin</option>
+        <option value="Feminin">Féminin</option>
+      </select>
+    </p>
+    <p><input type="date" placeholder="Date de naissance..." oninput="this.className = ''" name="" id="Edate" ></p>
+    <p><input placeholder="Lieux de naissance..." oninput="this.className = ''" name="" id="lieuNaiss" ></p>
+    <p>  
+      <select name="classe" id="classe">
+        <option value="">Classe sollicitée</option>
+        <option value="6ème">6ème</option>
+        <option value="5ème">5ème</option>
+        <option value="4ème">4ème</option>
+        <option value="3ème">3ème</option>
+        <option value="2nde">2nde</option>
+        <option value="1ère">1ère</option>
+        <option value="Tle">Tle</option>
+      </select>
+  </p>
+
+        <div class="index-btn-wrapper">
+          <div class="index-btn" onclick="run(1, 2);">Next</div>
+        </div>
+      </div>
+
+      <div class="tab" id = "tab-2">
+
+        <h3>Formulaire du tuteur</h3>
+        <p><input placeholder="Entrez un nom..." oninput="this.className = ''" name="" id="Tnom" ></p>
+        <p><input placeholder="Entrez un prénom..." oninput="this.className = ''" name="" id="Tprenom" ></p>
+        <p><input placeholder="Profession..." oninput="this.className = ''" name="" id="TProfession" ></p>
+        <p><input placeholder="Numéro de téléphone..." oninput="this.className = ''" name="" id="Tcontact" ></p>
+        <p><input placeholder="Adresse email..." oninput="this.className = ''" name="" id="Temail" ></p>
+        <div class="index-btn" onclick="run(2, 1);">Previous</div>
+        <button class = "index-btn" type="submit" name="submit" style = "background: red;">Soumettre</button>
+        
+      </div>
+
+    </form>
+    
+ 
+    <script>
+      // Default tab
+      $(".tab").css("display", "none");
+      $("#tab-1").css("display", "block");
+
+      function run(hideTab, showTab){
+        if(hideTab < showTab){ // If not press previous button
+          // Validation if press next button
+          var currentTab = 0;
+          x = $('#tab-'+hideTab);
+          y = $(x).find("input")
+          for (i = 0; i < y.length; i++){
+            if (y[i].value == ""){
+              $(y[i]).css("background", "#ffdddd");
+              return false;
+            }
+          }
+        }
+
+        // Progress bar
+        for (i = 1; i < showTab; i++){
+          $("#step-"+i).css("opacity", "1");
+        }
+
+        // Switch tab
+        $("#tab-"+hideTab).css("display", "none");
+        $("#tab-"+showTab).css("display", "block");
+        $("input").css("background", "#fff");
+      }
+
+
+
+
+      
+    // VARIABLE
+
+    // ELEVE
+let nomEleve = document.getElementById("Enom"),
+    prenomEleve = document.getElementById("Eprenom"),
+    selectSexe = document.getElementById("sexe"),
+    dateEleve = document.getElementById("Edate"),
+    lieuEleve = document.getElementById("lieuNaiss"),
+    selectClasse = document.getElementById("classe");
+
+    // TUTEUR
+let nomTuteur = document.getElementById("Tnom"),
+    prenomTuteur = document.getElementById("Tprenom"),
+    ProfessionTuteur = document.getElementById("TProfession"),
+    contactTuteur = document.getElementById("Tcontact"),
+    emailTuteur = document.getElementById("Temail");
+
+
+      
+let post = document.getElementById("regForm");
+
+post.addEventListener("submit", function(event){
+  event.preventDefault()
+  
+  // RECUP DATA 
+  console.log(nomEleve.value);
+  console.log(prenomEleve.value);
+  console.log(selectClasse.options[selectClasse.selectedIndex].value);
+  console.log(dateEleve.value);
+  console.log(lieuEleve.value);
+  console.log(selectSexe.options[selectSexe.selectedIndex].value);
+
+
+  console.log(nomTuteur.value);
+  console.log(prenomTuteur.value);
+  console.log(ProfessionTuteur.value);
+  console.log(contactTuteur.value);
+  console.log(emailTuteur.value);
+
+  run(2, 1)
+});
+
+// LOCALE STORAGE
+
+
+
+// localStorage.setItem("nom", "ink ");
+
+// document.getElementById("demo").innerHTML = localStorage.getItem("nom");
+
+
+
+// localStorage.removeItem("nom")
+
+      
+    </script>
+  </body>
+</html>
